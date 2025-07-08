@@ -1,0 +1,75 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "add_task",
+      "description": "Add a new task to Todoist",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The content/description of the task"
+          },
+          "project_id": {
+            "type": "string",
+            "description": "Optional project ID to add the task to"
+          },
+          "due_date": {
+            "type": "string",
+            "description": "Optional due date in ISO format (YYYY-MM-DD)"
+          },
+          "priority": {
+            "type": "integer",
+            "description": "Task priority (1-4, where 1 is highest)",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional detailed description of the task"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional list of label names to apply"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_projects",
+      "description": "Get all Todoist projects",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_tasks",
+      "description": "Get tasks from Todoist, optionally filtered by project",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Optional project ID to filter tasks"
+          }
+        },
+        "required": []
+      }
+    }
+  }
+]

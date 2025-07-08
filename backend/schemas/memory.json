@@ -1,0 +1,45 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "update_preference",
+      "description": "Update a user preference in memory",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The preference key to update"
+          },
+          "value": {
+            "type": "string",
+            "description": "The new value for the preference"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_preference",
+      "description": "Get a user preference from memory",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The preference key to retrieve"
+          }
+        },
+        "required": [
+          "key"
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "user_id": null,
+  "conversation_history": [
+    {
+      "user_input": "Show me my Todoist projects",
+      "ai_response": "It seems that your Todoist integration is currently disabled. Would you like me to enable it for you so I can access your projects?",
+      "tools_used": [],
+      "timestamp": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "preferences": {
+    "language": "en",
+    "timezone": "UTC",
+    "notification_preferences": {}
+  },
+  "todoist_integration": {
+    "enabled": false,
+    "last_sync": null,
+    "project_mappings": {}
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "last_updated": "2024-01-01T00:00:00Z",
+  "interaction_count": 0,
+  "last_interaction": {
+    "user_input": "Show me my Todoist projects",
+    "ai_response": "It seems that your Todoist integration is currently disabled. Would you like me to enable it for you so I can access your projects?",
+    "tools_used": [],
+    "timestamp": "2024-01-01T00:00:00Z"
+  }
+}
