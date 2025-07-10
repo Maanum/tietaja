@@ -260,15 +260,48 @@ class TodoistMCPService:
             Dictionary with update result
         """
         try:
-            # TODO: Implement actual Todoist API call via MCP
+            if not self.api_token:
+                logger.warning("No Todoist API token available")
+                return {
+                    "success": False,
+                    "error": "No Todoist API token configured",
+                    "message": "Failed to update task"
+                }
+            
             logger.info(f"Updating Todoist task: {task_id}")
             
-            return {
-                "success": True,
-                "task_id": task_id,
-                "message": "Task updated successfully"
-            }
+            # Make API request to update task
+            response = requests.post(
+                f"{self.base_url}/tasks/{task_id}",
+                headers=self.headers,
+                json=updates,
+                timeout=10
+            )
             
+            if response.status_code == 200:
+                task_data = response.json()
+                logger.info(f"Successfully updated task: {task_id}")
+                return {
+                    "success": True,
+                    "task_id": task_id,
+                    "task": task_data,
+                    "message": "Task updated successfully"
+                }
+            else:
+                logger.error(f"Todoist API error: {response.status_code} - {response.text}")
+                return {
+                    "success": False,
+                    "error": f"API request failed: {response.status_code}",
+                    "message": "Failed to update task"
+                }
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Network error updating Todoist task: {str(e)}")
+            return {
+                "success": False,
+                "error": f"Network error: {str(e)}",
+                "message": "Failed to update task"
+            }
         except Exception as e:
             logger.error(f"Error updating Todoist task: {str(e)}")
             return {
@@ -288,21 +321,109 @@ class TodoistMCPService:
             Dictionary with close result
         """
         try:
-            # TODO: Implement actual Todoist API call via MCP
+            if not self.api_token:
+                logger.warning("No Todoist API token available")
+                return {
+                    "success": False,
+                    "error": "No Todoist API token configured",
+                    "message": "Failed to close task"
+                }
+            
             logger.info(f"Closing Todoist task: {task_id}")
             
-            return {
-                "success": True,
-                "task_id": task_id,
-                "message": "Task closed successfully"
-            }
+            # Make API request to close task
+            response = requests.post(
+                f"{self.base_url}/tasks/{task_id}/close",
+                headers=self.headers,
+                timeout=10
+            )
             
+            if response.status_code == 204:  # No content for successful close
+                logger.info(f"Successfully closed task: {task_id}")
+                return {
+                    "success": True,
+                    "task_id": task_id,
+                    "message": "Task closed successfully"
+                }
+            else:
+                logger.error(f"Todoist API error: {response.status_code} - {response.text}")
+                return {
+                    "success": False,
+                    "error": f"API request failed: {response.status_code}",
+                    "message": "Failed to close task"
+                }
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Network error closing Todoist task: {str(e)}")
+            return {
+                "success": False,
+                "error": f"Network error: {str(e)}",
+                "message": "Failed to close task"
+            }
         except Exception as e:
             logger.error(f"Error closing Todoist task: {str(e)}")
             return {
                 "success": False,
                 "error": str(e),
                 "message": "Failed to close task"
+            }
+    
+    async def delete_task(self, task_id: str) -> Dict[str, Any]:
+        """
+        Delete a task from Todoist.
+        
+        Args:
+            task_id: ID of the task to delete
+            
+        Returns:
+            Dictionary with delete result
+        """
+        try:
+            if not self.api_token:
+                logger.warning("No Todoist API token available")
+                return {
+                    "success": False,
+                    "error": "No Todoist API token configured",
+                    "message": "Failed to delete task"
+                }
+            
+            logger.info(f"Deleting Todoist task: {task_id}")
+            
+            # Make API request to delete task
+            response = requests.delete(
+                f"{self.base_url}/tasks/{task_id}",
+                headers=self.headers,
+                timeout=10
+            )
+            
+            if response.status_code == 204:  # No content for successful delete
+                logger.info(f"Successfully deleted task: {task_id}")
+                return {
+                    "success": True,
+                    "task_id": task_id,
+                    "message": "Task deleted successfully"
+                }
+            else:
+                logger.error(f"Todoist API error: {response.status_code} - {response.text}")
+                return {
+                    "success": False,
+                    "error": f"API request failed: {response.status_code}",
+                    "message": "Failed to delete task"
+                }
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Network error deleting Todoist task: {str(e)}")
+            return {
+                "success": False,
+                "error": f"Network error: {str(e)}",
+                "message": "Failed to delete task"
+            }
+        except Exception as e:
+            logger.error(f"Error deleting Todoist task: {str(e)}")
+            return {
+                "success": False,
+                "error": str(e),
+                "message": "Failed to delete task"
             }
     
     async def get_labels(self) -> Dict[str, Any]:

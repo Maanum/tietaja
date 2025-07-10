@@ -17,6 +17,7 @@ class ChatResponse(BaseModel):
     user_id: str = Field(..., description="User ID this response is for")
     memory_updated: bool = Field(default=False, description="Whether user memory was updated")
     tools_used: Optional[List[str]] = Field(default=None, description="List of tools/actions used")
+    debug_trace: Optional[List[str]] = Field(default=None, description="Internal thinking steps and debug information")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional response metadata")
 
 class ToolCall(BaseModel):

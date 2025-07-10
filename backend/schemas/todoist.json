@@ -71,5 +71,91 @@
         "required": []
       }
     }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "delete_task",
+      "description": "Delete a task from Todoist",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "The ID of the task to delete"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "update_task",
+      "description": "Update an existing Todoist task",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "The ID of the task to update"
+          },
+          "content": {
+            "type": "string",
+            "description": "The new content/description of the task"
+          },
+          "project_id": {
+            "type": "string",
+            "description": "Optional new project ID"
+          },
+          "due_date": {
+            "type": "string",
+            "description": "Optional new due date in ISO format (YYYY-MM-DD)"
+          },
+          "priority": {
+            "type": "integer",
+            "description": "Task priority (1-4, where 1 is highest)",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional new detailed description"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional new list of label names"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "complete_task",
+      "description": "Mark a task as completed in Todoist",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "The ID of the task to complete"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      }
+    }
   }
 ]
